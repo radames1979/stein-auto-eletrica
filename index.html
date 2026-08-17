@@ -22,46 +22,98 @@
 <!-- Favicon: usa a marca oficial (coloque o arquivo "logo-stein.png" na mesma pasta do index.html) -->
 <link rel="icon" type="image/png" href="logo-stein.png" />
 
-<!-- Tailwind CSS via CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- PWA: permite "adicionar à tela inicial" no celular com ícone e nome da marca -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0a0a0b" />
+
+<!-- Dados estruturados (Schema.org): ajuda o Google a mostrar horário, telefone, nota e endereço direto na busca -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stein-auto-eletrica.pages.dev/#organization",
+      "name": "Stein Auto Elétrica",
+      "url": "https://stein-auto-eletrica.pages.dev/",
+      "logo": "https://stein-auto-eletrica.pages.dev/logo-stein.png",
+      "foundingDate": "1978",
+      "sameAs": [
+        "https://www.instagram.com/steinautoeletrica",
+        "https://www.facebook.com/people/Auto-El%C3%A9trica-Stein/100063755580150/?locale=pt_BR"
+      ]
+    },
+    {
+      "@type": "AutoPartsStore",
+      "@id": "https://stein-auto-eletrica.pages.dev/#matriz",
+      "name": "Stein Auto Elétrica",
+      "image": "https://images.unsplash.com/photo-1663642775693-6628f65358be?q=80&w=1200&auto=format&fit=crop",
+      "url": "https://stein-auto-eletrica.pages.dev/",
+      "telephone": "+55-47-3348-3644",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "R. Indaial, 357 - Dom Bosco",
+        "addressLocality": "Itajaí",
+        "addressRegion": "SC",
+        "postalCode": "88303-301",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -26.918257,
+        "longitude": -48.677419
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "12:00" }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.6",
+        "reviewCount": "574"
+      },
+      "parentOrganization": { "@id": "https://stein-auto-eletrica.pages.dev/#organization" }
+    },
+    {
+      "@type": "AutomotiveBusiness",
+      "name": "Stein Elétrica & Pátio Logístico",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Leonel Pereira, 53",
+        "addressLocality": "Itajaí",
+        "addressRegion": "SC",
+        "addressCountry": "BR"
+      },
+      "parentOrganization": { "@id": "https://stein-auto-eletrica.pages.dev/#organization" }
+    },
+    {
+      "@type": "AutomotiveBusiness",
+      "name": "Stein Alternadores",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Imbituba, 296",
+        "addressLocality": "Itajaí",
+        "addressRegion": "SC",
+        "addressCountry": "BR"
+      },
+      "parentOrganization": { "@id": "https://stein-auto-eletrica.pages.dev/#organization" }
+    }
+  ]
+}
+</script>
+
+<!--
+  CSS compilado do Tailwind (build de produção).
+  Se editar classes do Tailwind no HTML, rode: npx tailwindcss -i src/input.css -o styles.css --minify
+  A paleta de cores (ink/bone/accent) e fontes ficam em tailwind.config.js.
+-->
+<link rel="stylesheet" href="styles.css" />
 
 <!-- Google Fonts: Inter + Playfair Display -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
-
-<script>
-  // Paleta neutra e sofisticada, com vermelho como cor de destaque (combina com a marca Stein)
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          ink: {
-            950: '#0a0a0b',
-            900: '#111113',
-            800: '#1a1a1d',
-            700: '#26262b',
-            600: '#3a3a41',
-          },
-          bone: {
-            50: '#faf9f7',
-            100: '#f2f0ec',
-            200: '#e6e3dc',
-          },
-          accent: {
-            DEFAULT: '#e2231a',
-            light: '#f1453a',
-            dark: '#a8180f',
-          },
-        },
-        fontFamily: {
-          display: ['"Playfair Display"', 'serif'],
-          sans: ['Inter', 'sans-serif'],
-        },
-      },
-    },
-  };
-</script>
 
 <style>
   html { scroll-behavior: smooth; }
@@ -161,6 +213,12 @@
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.98.58 3.826 1.578 5.377L2 22l4.744-1.545A9.94 9.94 0 0012.001 22C17.523 22 22 17.523 22 12S17.523 2 12.001 2zm0 18.09a8.06 8.06 0 01-4.31-1.246l-.31-.184-3.187 1.037 1.05-3.14-.202-.322A8.058 8.058 0 013.91 12c0-4.464 3.626-8.09 8.09-8.09 4.465 0 8.09 3.626 8.09 8.09 0 4.465-3.625 8.09-8.09 8.09z"/></svg>
           WhatsApp
         </a>
+
+        <!-- Compartilhar -->
+        <button id="share-btn" aria-label="Compartilhar" title="Compartilhar"
+                class="p-2 text-white/80 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+        </button>
 
         <!-- Menu mobile toggle -->
         <button id="menu-btn" class="md:hidden text-white p-2" aria-label="Abrir menu">
@@ -636,6 +694,28 @@
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Compartilhar página (Web Share API, com fallback para copiar o link)
+  const shareBtn = document.getElementById('share-btn');
+  shareBtn.addEventListener('click', async () => {
+    const shareData = {
+      title: 'Stein Auto Elétrica',
+      text: 'Confira a Stein Auto Elétrica em Itajaí, SC — peças e serviços de auto elétrica desde 1978.',
+      url: window.location.href,
+    };
+    if (navigator.share) {
+      try { await navigator.share(shareData); } catch { /* usuário cancelou */ }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        const original = shareBtn.innerHTML;
+        shareBtn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 12.75l6 6 9-13.5" /></svg>';
+        setTimeout(() => { shareBtn.innerHTML = original; }, 1800);
+      } catch {
+        try { window.prompt('Copie o link do site:', shareData.url); } catch { /* ambiente sem suporte */ }
+      }
+    }
   });
 
   // Menu mobile

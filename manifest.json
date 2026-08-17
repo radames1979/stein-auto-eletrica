@@ -1,0 +1,19 @@
+{
+  "name": "Stein Auto Elétrica",
+  "short_name": "Stein",
+  "description": "Auto elétrica e peças automotivas em Itajaí, SC — desde 1978.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "logo-stein.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
