@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stein Auto Elétrica | Peças e Serviços Automotivos em Itajaí</title>
+<meta name="description" content="Stein Auto Elétrica — comércio de peças e serviços de auto elétrica em Itajaí, SC. Qualidade, confiança e tradição desde 1978." />
+
+<!-- Favicon: usa a marca oficial (coloque o arquivo "logo-stein.png" na mesma pasta do index.html) -->
+<link rel="icon" type="image/png" href="logo-stein.png" />
+
+<!-- Tailwind CSS via CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts: Inter + Playfair Display -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+<script>
+  // Paleta neutra e sofisticada, com vermelho como cor de destaque (combina com a marca Stein)
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: {
+            950: '#0a0a0b',
+            900: '#111113',
+            800: '#1a1a1d',
+            700: '#26262b',
+            600: '#3a3a41',
+          },
+          bone: {
+            50: '#faf9f7',
+            100: '#f2f0ec',
+            200: '#e6e3dc',
+          },
+          accent: {
+            DEFAULT: '#e2231a',
+            light: '#f1453a',
+            dark: '#a8180f',
+          },
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background-color: #0a0a0b; }
+  h1, h2, h3, .font-display { font-family: 'Playfair Display', serif; }
+
+  /* ===== Scroll reveal (fade-in leve, sem dependências) ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* Header transparente -> blur ao rolar */
+  #site-header {
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+  #site-header.scrolled {
+    background-color: rgba(10, 10, 11, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Hover underline elegante para links do menu */
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute; left: 0; bottom: -4px;
+    width: 0; height: 1px;
+    background-color: #d62828;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  /* Card hover lift */
+  .lift { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease; }
+  .lift:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.5); }
+
+  /* Scrollbar discreta */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #0a0a0b; }
+  ::-webkit-scrollbar-thumb { background: #26262b; border-radius: 8px; }
+
+  .text-balance { text-wrap: balance; }
+</style>
+</head>
+
+<body class="bg-ink-950 text-bone-100 antialiased selection:bg-accent selection:text-white">
+
+<!-- ============================================================ -->
+<!-- HEADER FIXO                                                   -->
+<!-- ============================================================ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="flex items-center justify-between h-24 md:h-28 py-2">
+
+      <!-- Logo: marca oficial (coloque "logo-stein.png" na mesma pasta do index.html) -->
+      <a href="#inicio" class="flex items-center gap-2 group">
+        <img src="logo-stein.png" alt="Stein Auto Elétrica"
+             class="h-16 md:h-20 w-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]"
+             onerror="this.remove(); document.getElementById('logo-fallback-header').classList.remove('hidden')" />
+        <span id="logo-fallback-header" class="hidden items-center gap-2">
+          <span class="font-display text-2xl md:text-3xl font-bold tracking-tight text-white">Stein</span>
+          <span class="hidden sm:inline text-[11px] uppercase tracking-[0.25em] text-bone-200/70 border-l border-white/20 pl-2 ml-1">Auto Elétrica</span>
+        </span>
+      </a>
+
+      <!-- Menu desktop -->
+      <nav class="hidden md:flex items-center gap-10 text-sm tracking-wide text-bone-100/90">
+        <a href="#inicio" class="nav-link">Início</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="#localizacao" class="nav-link">Localização</a>
+        <a href="#instagram" class="nav-link">Instagram</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </nav>
+
+      <!-- CTA WhatsApp -->
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/5547996776355" target="_blank" rel="noopener"
+           class="hidden sm:inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors duration-300 shadow-lg shadow-accent/20">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.98.58 3.826 1.578 5.377L2 22l4.744-1.545A9.94 9.94 0 0012.001 22C17.523 22 22 17.523 22 12S17.523 2 12.001 2zm0 18.09a8.06 8.06 0 01-4.31-1.246l-.31-.184-3.187 1.037 1.05-3.14-.202-.322A8.058 8.058 0 013.91 12c0-4.464 3.626-8.09 8.09-8.09 4.465 0 8.09 3.626 8.09 8.09 0 4.465-3.625 8.09-8.09 8.09z"/></svg>
+          WhatsApp
+        </a>
+
+        <!-- Menu mobile toggle -->
+        <button id="menu-btn" class="md:hidden text-white p-2" aria-label="Abrir menu">
+          <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu mobile -->
+  <div id="mobile-menu" class="hidden md:hidden bg-ink-950/95 backdrop-blur-lg border-t border-white/10">
+    <nav class="flex flex-col px-6 py-6 gap-5 text-base">
+      <a href="#inicio" class="mobile-link">Início</a>
+      <a href="#sobre" class="mobile-link">Sobre</a>
+      <a href="#localizacao" class="mobile-link">Localização</a>
+      <a href="#instagram" class="mobile-link">Instagram</a>
+      <a href="#contato" class="mobile-link">Contato</a>
+      <a href="https://wa.me/5547996776355" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-accent text-white font-medium px-5 py-3 rounded-full mt-2">
+        Falar no WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- HERO SECTION                                                  -->
+<!-- ============================================================ -->
+<section id="inicio" class="relative h-[100svh] min-h-[640px] w-full flex items-center justify-center overflow-hidden">
+  <!-- Imagem de fundo (placeholder Unsplash — troque pela foto real da loja) -->
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?q=80&w=2400&auto=format&fit=crop"
+         alt="Mecânico especializado realizando manutenção em motor automotivo"
+         class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-b from-ink-950/80 via-ink-950/60 to-ink-950"></div>
+    <div class="absolute inset-0 bg-ink-950/30"></div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center reveal">
+    <p class="uppercase tracking-[0.35em] text-accent-light text-xs md:text-sm font-medium mb-6">Auto Elétrica · Desde 1978 · Itajaí, SC</p>
+    <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.1] text-balance">
+      Precisão e confiança<br class="hidden sm:block" /> em cada serviço
+    </h1>
+    <p class="mt-6 text-base md:text-lg text-bone-200/80 max-w-xl mx-auto text-balance">
+      Peças e soluções em auto elétrica com a qualidade que seu veículo merece, há anos servindo Itajaí e região.
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#localizacao"
+         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-light text-white font-medium px-8 py-4 rounded-full transition-all duration-300 shadow-xl shadow-accent/25 hover:shadow-accent/40 hover:-translate-y-0.5">
+        Ver Localização
+      </a>
+      <a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener"
+         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/25 hover:border-white/60 text-white font-medium px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5">
+        Seguir no Instagram
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+    <svg class="w-5 h-5 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" /></svg>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SOBRE A LOJA                                                  -->
+<!-- ============================================================ -->
+<section id="sobre" class="py-24 md:py-36 bg-ink-950">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+
+      <!-- Texto -->
+      <div class="reveal">
+        <p class="uppercase tracking-[0.3em] text-accent-light text-xs font-medium mb-4">Sobre a Stein</p>
+        <h2 class="font-display text-3xl md:text-5xl font-semibold text-white leading-tight text-balance">
+          Tradição e excelência em auto elétrica
+        </h2>
+        <p class="mt-6 text-bone-200/75 leading-relaxed text-base md:text-lg">
+          Há anos no mercado de Itajaí, a Stein Auto Elétrica se consolidou como referência em peças e
+          atendimento especializado. Unimos experiência técnica, atendimento próximo e um compromisso
+          genuíno com a satisfação de cada cliente que passa pela nossa loja.
+        </p>
+
+        <!-- Cards de diferenciais -->
+        <div class="mt-12 grid sm:grid-cols-2 gap-5">
+          <div class="lift bg-ink-900 border border-white/10 rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" /></svg>
+            </div>
+            <h3 class="text-white font-medium text-lg mb-1">Qualidade garantida</h3>
+            <p class="text-sm text-bone-200/65">Peças confiáveis e testadas para o melhor desempenho do seu veículo.</p>
+          </div>
+
+          <div class="lift bg-ink-900 border border-white/10 rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.026 4.026" /></svg>
+            </div>
+            <h3 class="text-white font-medium text-lg mb-1">Equipe especializada</h3>
+            <p class="text-sm text-bone-200/65">Profissionais experientes prontos para orientar a solução ideal.</p>
+          </div>
+
+          <div class="lift bg-ink-900 border border-white/10 rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-white font-medium text-lg mb-1">Atendimento ágil</h3>
+            <p class="text-sm text-bone-200/65">Rapidez e eficiência para você não perder tempo.</p>
+          </div>
+
+          <div class="lift bg-ink-900 border border-white/10 rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941" /></svg>
+            </div>
+            <h3 class="text-white font-medium text-lg mb-1">Referência local</h3>
+            <p class="text-sm text-bone-200/65">Avaliação 4,6 estrelas com mais de 500 clientes satisfeitos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Imagem lateral -->
+      <div class="reveal">
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl shadow-black/50">
+          <img src="https://images.unsplash.com/photo-1783207938172-55bd0a680fa7?q=80&w=1600&auto=format&fit=crop"
+               alt="Painel e componentes elétricos automotivos de precisão"
+               class="w-full h-full object-cover" />
+          <div class="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- LOCALIZAÇÃO                                                   -->
+<!-- ============================================================ -->
+<section id="localizacao" class="py-24 md:py-36 bg-ink-900 border-y border-white/5">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="uppercase tracking-[0.3em] text-accent-light text-xs font-medium mb-4">Onde estamos</p>
+      <h2 class="font-display text-3xl md:text-5xl font-semibold text-white text-balance">Nossa Localização</h2>
+    </div>
+
+    <div class="mt-14 grid lg:grid-cols-5 gap-8 items-stretch">
+
+      <!-- Mapa (iframe) -->
+      <div class="lg:col-span-3 reveal">
+        <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40 h-[420px] lg:h-full">
+          <!--
+            MAPA DO GOOGLE:
+            Substitua o "src" do iframe abaixo pelo link de incorporação (Embed) real
+            gerado pelo Google Maps. Veja instruções completas ao final deste arquivo.
+          -->
+          <iframe
+            class="w-full h-full grayscale-[15%] contrast-[1.05]"
+            src="https://www.google.com/maps?q=R.+Indaial,+357+-+Dom+Bosco,+Itajaí+-+SC,+88303-301&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            style="border:0;">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Info lateral -->
+      <div class="lg:col-span-2 flex flex-col justify-center gap-6 reveal">
+        <div class="bg-ink-950 border border-white/10 rounded-2xl p-8">
+          <div class="flex items-start gap-4 mb-6">
+            <svg class="w-5 h-5 text-accent-light mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+            <div>
+              <h3 class="text-white font-medium mb-1">Endereço</h3>
+              <p class="text-bone-200/70 text-sm leading-relaxed">R. Indaial, 357 - Dom Bosco, Itajaí - SC, 88303-301</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 mb-8">
+            <svg class="w-5 h-5 text-accent-light mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <div>
+              <h3 class="text-white font-medium mb-1">Horário de funcionamento</h3>
+              <p class="text-bone-200/70 text-sm leading-relaxed">
+                Segunda a sexta: 08:00 – 18:00<br />
+                Sábado: 08:00 – 12:00<br />
+                Domingo: Fechado
+              </p>
+            </div>
+          </div>
+
+          <a href="https://maps.app.goo.gl/qBaYWvPADcd6zBwz5" target="_blank" rel="noopener"
+             class="w-full inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-light text-white font-medium px-6 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5">
+            Abrir no Google Maps
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 15V16.5a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9a2.25 2.25 0 012.25-2.25H7.5m3-1.5h4.5v4.5m0-4.5L10.5 13.5" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- INSTAGRAM                                                     -->
+<!-- ============================================================ -->
+<section id="instagram" class="py-24 md:py-36 bg-ink-950">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="uppercase tracking-[0.3em] text-accent-light text-xs font-medium mb-4">@steinautoeletrica</p>
+      <h2 class="font-display text-3xl md:text-5xl font-semibold text-white text-balance">Siga nosso Instagram</h2>
+      <p class="mt-4 text-bone-200/70">Acompanhe bastidores, serviços realizados e novidades da loja.</p>
+    </div>
+
+    <!--
+      GRID DE POSTS (placeholders):
+      Troque cada "src" abaixo pelos prints/fotos reais do seu Instagram.
+      Mantenha o formato quadrado (aspect-square) para o grid ficar alinhado.
+    -->
+    <div class="mt-14 grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 reveal">
+      <a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener" class="group relative aspect-square overflow-hidden rounded-xl">
+        <img src="https://images.unsplash.com/photo-1762329343682-94081d433990?q=80&w=800&auto=format&fit=crop" alt="Painel elétrico automotivo iluminado" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-ink-950/0 group-hover:bg-ink-950/40 transition-colors duration-300 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener" class="group relative aspect-square overflow-hidden rounded-xl">
+        <img src="https://images.unsplash.com/photo-1706899963791-519e86a93c1d?q=80&w=800&auto=format&fit=crop" alt="Motor de veículo em manutenção" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-ink-950/0 group-hover:bg-ink-950/40 transition-colors duration-300 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener" class="group relative aspect-square overflow-hidden rounded-xl">
+        <img src="https://images.unsplash.com/photo-1687462970787-61d953508926?q=80&w=800&auto=format&fit=crop" alt="Profissional realizando reparo elétrico no veículo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-ink-950/0 group-hover:bg-ink-950/40 transition-colors duration-300 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener" class="group relative aspect-square overflow-hidden rounded-xl">
+        <img src="https://images.unsplash.com/photo-1643700973089-baa86a1ab9ee?q=80&w=800&auto=format&fit=crop" alt="Técnico trabalhando em veículo na oficina" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-ink-950/0 group-hover:bg-ink-950/40 transition-colors duration-300 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener" class="group relative aspect-square overflow-hidden rounded-xl">
+        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?q=80&w=800&auto=format&fit=crop" alt="Atendimento profissional na Stein Auto Elétrica" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-ink-950/0 group-hover:bg-ink-950/40 transition-colors duration-300 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener" class="group relative aspect-square overflow-hidden rounded-xl">
+        <img src="https://images.unsplash.com/photo-1596986952526-3be237187071?q=80&w=800&auto=format&fit=crop" alt="Veículo revisado com serviço de qualidade" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-ink-950/0 group-hover:bg-ink-950/40 transition-colors duration-300 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        </div>
+      </a>
+    </div>
+
+    <div class="mt-14 text-center reveal">
+      <a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 bg-white text-ink-950 font-medium px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-white/10">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        Ver mais no Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CONTATO / CTA FINAL                                           -->
+<!-- ============================================================ -->
+<section id="contato" class="py-24 md:py-32 bg-gradient-to-b from-ink-900 to-ink-950 border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-6 text-center reveal">
+    <h2 class="font-display text-3xl md:text-5xl font-semibold text-white text-balance">Precisa de atendimento agora?</h2>
+    <p class="mt-5 text-bone-200/70 text-base md:text-lg">Fale diretamente com a nossa equipe pelo WhatsApp.</p>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="https://wa.me/5547996776355" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-white font-medium px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-xl shadow-accent/25">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.98.58 3.826 1.578 5.377L2 22l4.744-1.545A9.94 9.94 0 0012.001 22C17.523 22 22 17.523 22 12S17.523 2 12.001 2zm0 18.09a8.06 8.06 0 01-4.31-1.246l-.31-.184-3.187 1.037 1.05-3.14-.202-.322A8.058 8.058 0 013.91 12c0-4.464 3.626-8.09 8.09-8.09 4.465 0 8.09 3.626 8.09 8.09 0 4.465-3.625 8.09-8.09 8.09z"/></svg>
+        (47) 99677-6355
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                        -->
+<!-- ============================================================ -->
+<footer class="bg-ink-950 border-t border-white/10 pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+      <div>
+        <img src="logo-stein.png" alt="Stein Auto Elétrica"
+             class="h-20 w-auto object-contain"
+             onerror="this.remove(); document.getElementById('logo-fallback-footer').classList.remove('hidden')" />
+        <span id="logo-fallback-footer" class="hidden font-display text-2xl font-bold text-white">Stein</span>
+        <p class="mt-3 text-sm text-bone-200/60 leading-relaxed">Auto elétrica e peças automotivas com qualidade e confiança em Itajaí, SC — desde 1978.</p>
+      </div>
+
+      <div>
+        <h4 class="text-white text-sm font-medium uppercase tracking-wider mb-4">Navegação</h4>
+        <ul class="space-y-2 text-sm text-bone-200/60">
+          <li><a href="#inicio" class="hover:text-accent-light transition-colors">Início</a></li>
+          <li><a href="#sobre" class="hover:text-accent-light transition-colors">Sobre</a></li>
+          <li><a href="#localizacao" class="hover:text-accent-light transition-colors">Localização</a></li>
+          <li><a href="#instagram" class="hover:text-accent-light transition-colors">Instagram</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white text-sm font-medium uppercase tracking-wider mb-4">Contato</h4>
+        <ul class="space-y-2 text-sm text-bone-200/60">
+          <li><a href="https://wa.me/5547996776355" target="_blank" rel="noopener" class="hover:text-accent-light transition-colors">+55 47 99677-6355</a></li>
+          <li><a href="https://www.instagram.com/steinautoeletrica" target="_blank" rel="noopener" class="hover:text-accent-light transition-colors">@steinautoeletrica</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white text-sm font-medium uppercase tracking-wider mb-4">Endereço</h4>
+        <p class="text-sm text-bone-200/60 leading-relaxed">R. Indaial, 357 - Dom Bosco,<br />Itajaí - SC, 88303-301</p>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-bone-200/40">© 2026 Stein Auto Elétrica · Desde 1978. Todos os direitos reservados.</p>
+      <p class="text-xs text-bone-200/30">Site desenvolvido com dedicação.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header: transparente -> blur ao rolar
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Menu mobile
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    iconOpen.classList.toggle('hidden');
+    iconClose.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    });
+  });
+
+  // Scroll reveal (fade-in leve via IntersectionObserver)
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
